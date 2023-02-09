@@ -40,7 +40,7 @@ export class JogadoresService {
     }
 
     async deletarJogador(email: string): Promise<any> {
-        return await this.jogadorModel.remove({ email }).exec();
+        return await this.jogadorModel.deleteOne({ email }).exec();
     }
 
     private async criar(criaJogadorDTO: CriarJogadorDTO): Promise<Jogador> {
