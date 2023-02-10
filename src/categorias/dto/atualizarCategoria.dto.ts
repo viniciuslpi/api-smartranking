@@ -4,7 +4,7 @@ import { Evento } from "../interfaces/categoria.interface";
 
 
 @Injectable()
-export class AtualizarCategoriaDTO {
+export class AtualizarCategoriaDto {
 
     @IsString()
     @IsOptional()
