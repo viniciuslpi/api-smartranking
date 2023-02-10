@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Param, Post, Put, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CategoriasService } from './categorias.service';
-import { AtualizarCategoriaDTO } from './dto/atualizarCategoria.dto';
-import { CriarCategoriaDTO } from './dto/criar-categoria.dto';
+import { AtualizarCategoriaDto } from './dto/atualizarCategoria.dto';
+import { CriarCategoriaDto } from './dto/criar-categoria.dto';
 import { Categoria } from './interfaces/categoria.interface';
 
 @Controller('api/v1/categorias')
@@ -11,7 +11,7 @@ export class CategoriasController {
 
     @Post()
     @UsePipes(ValidationPipe)
-    async criarCategoria(@Body() criarCategoriaDTO: CriarCategoriaDTO): Promise<Categoria> {
+    async criarCategoria(@Body() criarCategoriaDTO: CriarCategoriaDto): Promise<Categoria> {
         return await this.categoriasService.criarCategoria(criarCategoriaDTO);
     }
 
@@ -22,16 +22,16 @@ export class CategoriasController {
 
     @Get('/:categoria')
     async consultarCategoriaPeloID(@Param('categoria') categoria: string): Promise<Categoria> {
-        return await this.categoriasService.consultarCategoriaPeloID(categoria);
+        return await this.categoriasService.consultarCategoriaPeloId(categoria);
     }
 
     @Put('/:categoria')
     @UsePipes(ValidationPipe)
     async atualizarCategoria(
-        @Body() atualizarCategoriaDTO: AtualizarCategoriaDTO,
-        @Param('categoria') categoria: string): Promise<Categoria> {
+        @Body() atualizarCategoriaDto: AtualizarCategoriaDto,
+        @Param('categoria') categoria: string): Promise<void> {
 
-        return await this.categoriasService.atualizarCategoria(categoria, atualizarCategoriaDTO);
+        await this.categoriasService.atualizarCategoria(categoria, atualizarCategoriaDto);
     }
 
     @Post('/:categoria/jogadores/:_id')
